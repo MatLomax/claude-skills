@@ -22,18 +22,22 @@ The engine is generic. Everything project-specific — mockup path, device scale
 ignore masks, thresholds, named regions — lives in a **project profile** file,
 not in this skill.
 
-## Setup (once per project)
+## Setup (once)
+
+The Python scripts need: `opencv-python-headless`, `scikit-image`, `pillow`,
+`numpy`. When installed as a plugin the scripts live in a shared, read-only
+cache — so create the venv somewhere **writable** and invoke the scripts with
+its interpreter (do not create it inside the scripts dir):
 
 ```bash
-cd <this skill's scripts dir>          # or copy scripts alongside your work
-python3 -m venv .venv
-.venv/bin/pip install opencv-python-headless scikit-image pillow numpy
+python3 -m venv ~/.vdiff-venv
+~/.vdiff-venv/bin/pip install opencv-python-headless scikit-image pillow numpy
 ```
 
-Rendering uses a cached Playwright `chrome-headless-shell` (no Node). It is
-found automatically under `~/.cache/ms-playwright`; override with
-`CHROME_HEADLESS_SHELL=/path/to/chrome-headless-shell`. Run the Python scripts
-with the venv interpreter (`.venv/bin/python`).
+Run `vdiff.py` (and `init_config.py`) **from the project root** so the config
+and mockup paths resolve. Rendering uses a cached Playwright
+`chrome-headless-shell` (no Node), found automatically under
+`~/.cache/ms-playwright`; override with `CHROME_HEADLESS_SHELL=/path/to/binary`.
 
 ## The project profile
 
@@ -44,7 +48,7 @@ Resolved by `vdiff.py` in this order:
 Scaffold one from a mockup (reads its real dimensions):
 
 ```bash
-.venv/bin/python scripts/init_config.py path/to/mockup.png
+~/.vdiff-venv/bin/python scripts/init_config.py path/to/mockup.png
 # -> writes .visual-diff.config.json with correct geometry + empty stubs
 ```
 
@@ -74,7 +78,7 @@ Schema and a filled example are in `assets/`. Fields: `mockup`, `viewport`
 2. **Build** `candidate.html` — your reconstruction of the page.
 3. **Gate:**
    ```bash
-   .venv/bin/python scripts/vdiff.py candidate.html out/
+   ~/.vdiff-venv/bin/python scripts/vdiff.py candidate.html out/
    #   add --color to also run the tint sweep, --measure for glyph sizing
    ```
    `vdiff.py` renders the candidate at the mockup's geometry, compares, writes
