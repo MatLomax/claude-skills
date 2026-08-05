@@ -1,0 +1,12 @@
+{
+  "name": "claude-skills",
+  "owner": { "name": "Mathieu Lomax" },
+  "plugins": [
+    {
+      "name": "image-to-html",
+      "source": "./plugins/image-to-html",
+      "description": "Reconstruct HTML from a mockup image and objectively gate the render against it (per-region SSIM, edge-XOR, colour sweeps, glyph measurement).",
+      "defaultEnabled": false
+    }
+  ]
+}

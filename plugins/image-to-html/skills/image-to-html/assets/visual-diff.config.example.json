@@ -1,0 +1,12 @@
+{
+  "mockup": "mockup.png",
+  "viewport": { "cssW": 1440, "cssH": 900, "scale": 2 },
+  "ignore": [],
+  "thresholds": { "minSsim": 0.92, "maxRmse": 12.0, "cellSsim": 0.80, "maxCellFail": 0, "grid": 16 },
+  "regions": {
+    "hero-heading": [80, 120, 1360, 260]
+  },
+  "textBoxes": {
+    "hero-heading": [80, 120, 1360, 260]
+  }
+}

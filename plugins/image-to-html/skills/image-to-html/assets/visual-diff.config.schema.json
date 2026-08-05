@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "visual-diff project profile",
+  "description": "Per-project inputs for the image-to-html skill. Lives in the project (default .visual-diff.config.json), never in the skill.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["mockup"],
+  "properties": {
+    "mockup": {
+      "type": "string",
+      "description": "Path to the reference mockup PNG, relative to where vdiff.py is run."
+    },
+    "viewport": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "CSS viewport and the device scale the mockup was exported at. Candidate render geometry is derived as mockup_px / scale.",
+      "properties": {
+        "cssW": { "type": "integer", "minimum": 1 },
+        "cssH": { "type": "integer", "minimum": 1 },
+        "scale": { "type": "integer", "minimum": 1, "default": 2 }
+      }
+    },
+    "ignore": {
+      "type": "array",
+      "description": "Rectangles [x0,y0,x1,y1] in mockup px to mask before comparing (cursors, timestamps, other dynamic artefacts).",
+      "items": {
+        "type": "array",
+        "items": { "type": "integer" },
+        "minItems": 4,
+        "maxItems": 4
+      }
+    },
+    "thresholds": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Pass/fail gate. Trust per-region (cellSsim) over global (minSsim) — a page of whitespace scores high globally even with real defects.",
+      "properties": {
+        "minSsim": { "type": "number", "default": 0.92 },
+        "maxRmse": { "type": "number", "default": 12.0 },
+        "cellSsim": { "type": "number", "default": 0.80 },
+        "maxCellFail": { "type": "integer", "default": 0 },
+        "grid": { "type": "integer", "default": 16 }
+      }
+    },
+    "regions": {
+      "type": "object",
+      "description": "Named boxes {name:[x0,y0,x1,y1]} in mockup px for the --color sweep (per-region RGB/tint deltas).",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "type": "integer" },
+        "minItems": 4,
+        "maxItems": 4
+      }
+    },
+    "textBoxes": {
+      "type": "object",
+      "description": "Named boxes {name:[x0,y0,x1,y1]} in mockup px for --measure (tight glyph height/width, for matching font sizes).",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "type": "integer" },
+        "minItems": 4,
+        "maxItems": 4
+      }
+    }
+  }
+}

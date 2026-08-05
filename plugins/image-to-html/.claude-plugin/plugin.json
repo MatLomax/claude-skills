@@ -1,0 +1,6 @@
+{
+  "name": "image-to-html",
+  "description": "Reconstruct HTML from a mockup image and objectively gate the render against it (per-region SSIM, edge-XOR, colour sweeps, glyph measurement).",
+  "version": "1.0.0",
+  "author": { "name": "Mathieu Lomax" }
+}
