@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "worklog": {
+      "command": "worklog",
+      "args": ["serve"]
+    }
+  }
+}
