@@ -1,4 +1,4 @@
-# mat-skills
+# claude-plugins
 
 A private Claude Code plugin marketplace — a single central registry so skills
 don't have to be duplicated and fragmented across projects. Registering the
@@ -10,7 +10,7 @@ opted into **per project**.
 From the **root of the repo you want to enable plugins in**, run:
 
 ```bash
-npx github:MatLomax/claude-skills
+npx github:MatLomax/claude-plugins
 ```
 
 The interactive installer lets you tick which plugins to enable (all off by
@@ -28,14 +28,14 @@ Prefer to wire it by hand?
 
 ```bash
 # once per machine — registers the catalogue, enables nothing
-/plugin marketplace add MatLomax/claude-skills
+/plugin marketplace add MatLomax/claude-plugins
 
 # in a project that wants a skill — writes .claude/settings.json (committed)
-/plugin install image-to-html@claude-skills --scope project
+/plugin install image-to-html@matlomax --scope project
 #   …or --scope local to keep it out of git
 ```
 
-Update later with `/plugin marketplace update claude-skills`.
+Update later with `/plugin marketplace update matlomax`.
 
 ## Plugins
 

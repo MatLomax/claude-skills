@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-// Interactive installer for the `claude-skills` Claude Code plugin marketplace.
+// Interactive installer for the `matlomax` Claude Code plugin marketplace.
 //
 // Run from the root of the repo you want to enable the plugins in:
-//   npx github:MatLomax/claude-skills
+//   npx github:MatLomax/claude-plugins
 //
 // It multiselects the marketplace's plugins (all off by default) and deep-merges
 // `.claude/settings.json` in the current repo — registering the marketplace and
@@ -16,8 +16,8 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
-const MARKETPLACE_ID = 'claude-skills';
-const REPO = 'MatLomax/claude-skills';
+const MARKETPLACE_ID = 'matlomax';
+const REPO = 'MatLomax/claude-plugins';
 const KNOWN_PLUGINS = ['worklog', 'image-to-html'];
 const GO_MIN = [1, 27]; // worklog's go.mod: `go 1.27.0`
 
@@ -133,11 +133,11 @@ async function worklogSetup() {
 
 async function main() {
   if (!process.stdout.isTTY || !process.stdin.isTTY) {
-    console.error('claude-skills-install is interactive — run it in a terminal (not piped or in CI).');
+    console.error('claude-plugins-install is interactive — run it in a terminal (not piped or in CI).');
     process.exit(1);
   }
 
-  intro('claude-skills plugins');
+  intro('matlomax plugins');
   log.message(`Enabling the marketplace "${MARKETPLACE_ID}" (${REPO}) in:\n${cwd}`);
 
   const plugins = guard(
