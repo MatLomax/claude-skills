@@ -82,7 +82,7 @@ function goBinDir() {
   return '$(go env GOPATH)/bin';
 }
 
-// worklog is attach-only: `worklog init` creates ./.solstice/work.db (idempotent).
+// worklog is attach-only: `worklog init` creates ./.worklog/tasks.db (idempotent).
 function worklogInit() {
   const r = spawnSync('worklog', ['init'], { cwd, encoding: 'utf8' });
   return { ok: !r.error && r.status === 0, out: (r.stdout || r.stderr || '').trim() };
@@ -115,7 +115,7 @@ async function worklogSetup() {
   if (status.binary.ok) {
     const doInit = guard(
       await confirm({
-        message: 'Initialise worklog for this repo now? (creates ./.solstice/work.db — idempotent)',
+        message: 'Initialise worklog for this repo now? (creates ./.worklog/tasks.db — idempotent)',
         initialValue: true,
       })
     );
@@ -183,7 +183,7 @@ async function main() {
         : '✗ worklog not on PATH — install it: `go install github.com/MatLomax/worklog/cmd/worklog@latest`, or download a release from github.com/MatLomax/worklog/releases.'
     );
 
-    if (st.initialised) checks.push('✓ worklog initialised for this repo (.solstice/work.db).');
+    if (st.initialised) checks.push('✓ worklog initialised for this repo (.worklog/tasks.db).');
     else if (st.binary.ok) checks.push('⚠ worklog not initialised here — run `/worklog:init` (or `worklog init`) to activate it.');
 
     note(checks.join('\n'), 'worklog');
