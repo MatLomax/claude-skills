@@ -5,7 +5,26 @@ don't have to be duplicated and fragmented across projects. Registering the
 marketplace enables **nothing**; every plugin is `defaultEnabled: false` and is
 opted into **per project**.
 
-## Use it
+## Install
+
+From the **root of the repo you want to enable plugins in**, run:
+
+```bash
+npx github:MatLomax/claude-skills
+```
+
+The interactive installer lets you tick which plugins to enable (all off by
+default), then **deep-merges** `.claude/settings.json` in that repo — registering
+the marketplace and enabling exactly what you picked, never clobbering existing
+settings, safe to re-run. When you enable `worklog` it also verifies its runtime
+(Go 1.27+ and the `worklog` binary), offers to `go install` the binary if it is
+missing, and offers to run `worklog init` so the repo's task log is live rather
+than inert. It needs a terminal (it is interactive) and, at the end, reports what
+it verified. Then reload Claude Code and accept the "trust this folder" dialog.
+
+## Manual setup
+
+Prefer to wire it by hand?
 
 ```bash
 # once per machine — registers the catalogue, enables nothing
@@ -28,6 +47,7 @@ Update later with `/plugin marketplace update claude-skills`.
 ## Layout
 
 ```
+install.mjs · package.json           # the `npx` interactive installer (repo root)
 .claude-plugin/marketplace.json      # the catalogue
 plugins/<name>/
 ├── .claude-plugin/plugin.json       # plugin manifest

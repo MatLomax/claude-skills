@@ -1,0 +1,16 @@
+{
+  "name": "claude-skills-installer",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Interactive installer that enables the claude-skills Claude Code plugins in a repo. The plugins carry their own runtimes (worklog is a separate Go binary); this dependency is the installer's alone.",
+  "bin": {
+    "claude-skills-install": "install.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.7.0"
+  }
+}
